@@ -1,0 +1,15 @@
+<!-- templates/frontend/homepage.html -->
+
+{% extends 'frontend/base.html' %}  <!-- Inherit from the base template -->
+
+{% load static %}  <!-- Load static files (if used in this template) -->
+
+{% block content %}
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 30vh;">
+    {% if user.is_authenticated %}
+        <!-- You can add content for authenticated users here -->
+    {% endif %}
+    <h2>Manage Your Passwords Securely</h2>  <!-- Heading for the homepage -->
+    <p>This is the homepage where users can manage and generate passwords.</p>  <!-- Description of the page -->
+</div>
+{% endblock %}
