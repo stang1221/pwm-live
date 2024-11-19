@@ -1,0 +1,37 @@
+{% extends 'frontend/base.html' %}
+{% load i18n %}
+
+{% block content %}
+{{ block.super }}
+<div class="container">
+  <h1 class="page-title text-center mb-4">{% trans "Two Factor Settings" %}</h1>
+
+  <div class="section-custom card-custom">
+    <h2>{% trans "Manage Security Methods" %}</h2>
+    <ul class="list-custom">
+      <li><a href="{% url 'kagi:backup-codes' %}" class="list-item-custom">{% trans 'Manage backup codes' %}</a></li>
+      <li><a href="{% url 'kagi:totp-devices' %}" class="list-item-custom">{% trans 'Manage TOTP (Authenticator) devices' %}</a></li>
+    </ul>
+  </div>
+
+  <div class="section-custom card-custom mt-4">
+    <h2>{% trans "Status" %}</h2>
+    <ul class="list-custom">
+      <li>{% trans "TOTP" %}: 
+        <span class="status-indicator">
+          {% if totp_enabled %}{% trans "On" %}{% else %}{% trans "Off" %}{% endif %}
+        </span>
+      </li>
+      <li>{% trans "Backup codes" %}: 
+        <span class="status-indicator">
+          {% if backup_codes_count %}{{ backup_codes_count }} {% trans "remaining" %}{% else %}{% trans "None generated" %}{% endif %}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="action-links text-center mt-5">
+    <a href="{% url 'dashboard' %}" class="btn-custom btn-back-custom">Back to Dashboard</a>
+  </div>
+</div>
+{% endblock %}
