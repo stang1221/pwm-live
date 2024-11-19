@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    {% load static %}
+    {% load i18n %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Adjust path as needed -->
+</head>
+<body>
+    {% block content %}
+    <script src="{% static 'kagi/base64js.min.js' %}"></script>
+    <script>
+        window.Kagi = window.Kagi || {};
+        Kagi.begin_activate = '{% url "kagi:begin-activate" %}';
+        Kagi.begin_assertion = '{% url "kagi:begin-assertion" %}';
+        Kagi.verify_credential_info = '{% url "kagi:verify-credential-info" %}';
+        Kagi.verify_assertion = '{% url "kagi:verify-assertion" %}';
+        Kagi.keys_list = '{% url "kagi:webauthn-keys" %}';
+    </script>
+    
+    <div id="webauthn-undefined-error" style="display: none;">
+        {% blocktrans %}
+        This browser is not among the <a href="https://caniuse.com/webauthn" target="_blank">
+        list of browsers that support WebAuthn security keys.</a>
+        {% endblocktrans %}
+    </div>
+    {% endblock %}
+</body>
+</html>
